@@ -623,7 +623,7 @@ export class NewSearchComponent implements OnInit {
           this.latitude = lat;
           this.longitude = lng;
 
-          console.log('已取得位置');
+          console.log('已取得位置', lat, lng);
 
           return of([]);
         })

@@ -21,8 +21,11 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 更新打包後的靜態資源到ios folder
 
+`ng build --configuration=production --aot --output-path=dist`
+
 `npx cap sync ios`
 
 開啟Xcode
+
 `npx cap open ios`
 
