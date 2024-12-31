@@ -12,8 +12,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 `ng build --configuration=production --base-href /friendly-time/ --output-path=docs --aot`
 
-
-打包在dist
+打包在dist/專案名稱
 
 `ng build --configuration=production --aot`
 
