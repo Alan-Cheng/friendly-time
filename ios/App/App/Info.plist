@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleDevelopmentRegion</key>
-    <string>en</string>
+    <string>zh_TW</string> <!-- 設定開發區域為繁體中文（台灣）-->
     <key>CFBundleDisplayName</key>
-    <string>friendly-time</string>
+    <string>友善黑貓</string> <!-- 應用顯示名稱設為「友善貓」-->
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
-    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <string>com.example.FriendlyCat</string> <!-- 替換為你自己專案的唯一識別符號 -->
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
@@ -17,9 +17,9 @@
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>$(MARKETING_VERSION)</string>
+    <string>1.0</string> <!-- 設定為第一次上版的版本號 -->
     <key>CFBundleVersion</key>
-    <string>$(CURRENT_PROJECT_VERSION)</string>
+    <string>1</string> <!-- 設定構建版本號 -->
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>UILaunchStoryboardName</key>
@@ -46,7 +46,7 @@
     <key>UIViewControllerBasedStatusBarAppearance</key>
     <true/>
 
-    <!-- App Transport Security settings -->
+    <!-- App Transport Security 設定 -->
     <key>NSAppTransportSecurity</key>
     <dict>
         <key>NSAllowsArbitraryLoads</key>
@@ -57,8 +57,8 @@
         <true/>
         <key>NSExceptionDomains</key>
         <dict>
-            <!-- Allow HTTP (for external URLs) -->
-            <key>example.com</key> <!-- Replace with the actual domain you need to allow -->
+            <!-- 允許 HTTP 請求 -->
+            <key>example.com</key> <!-- 替換為你需要允許的實際域名 -->
             <dict>
                 <key>NSExceptionAllowsInsecureHTTPLoads</key>
                 <true/>
@@ -68,16 +68,16 @@
         </dict>
     </dict>
 
-    <!-- Privacy usage descriptions -->
+    <!-- 隱私權限描述 -->
     <key>NSCameraUsageDescription</key>
-    <string>We need access to your camera for scanning QR codes.</string>
+    <string>我們需要訪問您的相機來掃描 QR 代碼。</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>We need access to your photo library to upload images.</string>
+    <string>我們需要訪問您的照片庫來上傳圖片。</string>
 
-    <!-- Location usage descriptions -->
+    <!-- 位置權限描述 -->
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>We need to access your location for location-based features.</string>
+    <string>我們需要訪問您的位置來啟用基於位置的功能。</string>
     <key>NSLocationAlwaysUsageDescription</key>
-    <string>We need to access your location even when the app is in the background.</string>
+    <string>我們需要訪問您的位置，即使應用處於背景狀態也能提供服務。</string>
 </dict>
 </plist>

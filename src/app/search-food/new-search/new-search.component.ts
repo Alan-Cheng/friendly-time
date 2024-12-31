@@ -231,7 +231,7 @@ export class NewSearchComponent implements OnInit {
               this.latitude = lat;
               this.longitude = lng;
 
-              console.log('已取得位置');
+              console.log('已取得位置', lat, lng);
 
               return of([]);
             }),
@@ -477,7 +477,7 @@ export class NewSearchComponent implements OnInit {
           this.latitude = lat;
           this.longitude = lng;
 
-          console.log('已取得位置');
+          console.log('已取得位置', lat, lng);
 
           return of([]);
         }),
@@ -528,7 +528,7 @@ export class NewSearchComponent implements OnInit {
           this.latitude = lat;
           this.longitude = lng;
 
-          console.log('已取得位置');
+          console.log('已取得位置', lat, lng);
 
           return of([]);
         }),
@@ -608,7 +608,6 @@ export class NewSearchComponent implements OnInit {
     else{
       // 根據距離排序
       this.totalStoresShowList.sort((a, b) => a.distance - b.distance);
-      console.log('最近的商店:', this.totalStoresShowList);
     }
   }
 
