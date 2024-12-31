@@ -614,59 +614,72 @@ export class NewSearchComponent implements OnInit {
 
   searchCombineAndTransformStores(storeLatitude?: number, storeLongitude?: number): void {
     // 如果没有參數就用默認的定位值
-    const finalLatitude = storeLatitude || this.latitude;
-    const finalLongitude = storeLongitude || this.longitude;
+    from(this.geolocationService.getCurrentPosition())
+      .pipe(
+        switchMap((position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
 
-    const locationData711: LocationData = {
-      CurrentLocation: {
-        Latitude: finalLatitude,
-        Longitude: finalLongitude
-      },
-      SearchLocation: {
-        Latitude: finalLatitude,
-        Longitude: finalLongitude
-      }
-    };
+          this.latitude = lat;
+          this.longitude = lng;
 
-    const locationFamilyMart: Location = {
-      Latitude: finalLatitude,
-      Longitude: finalLongitude
-    };
+          console.log('已取得位置');
 
+          return of([]);
+        })
+      ).subscribe((res) =>{
+        const finalLatitude = storeLatitude || this.latitude;
+        const finalLongitude = storeLongitude || this.longitude;
 
+        const locationData711: LocationData = {
+          CurrentLocation: {
+            Latitude: finalLatitude,
+            Longitude: finalLongitude
+          },
+          SearchLocation: {
+            Latitude: finalLatitude,
+            Longitude: finalLongitude
+          }
+        };
 
-    // 結合兩個 API 請求
-    forkJoin({
-      sevenEleven: this.sevenElevenService.getNearByStoreList(locationData711),
-      familyMart: this.familyMartService.getNearByStoreList(locationFamilyMart)
-    }).subscribe(
-      ({ sevenEleven, familyMart }) => {
-        // 處理 7-11 資料
-        if (sevenEleven && sevenEleven.element && sevenEleven.element.StoreStockItemList) {
-          this.nearby711Stores = sevenEleven.element.StoreStockItemList.sort(
-            (a: StoreStockItem, b: StoreStockItem) => a.Distance - b.Distance
-          );
-        }
+        const locationFamilyMart: Location = {
+          Latitude: finalLatitude,
+          Longitude: finalLongitude
+        };
 
-        // 處理全家資料
-        if (familyMart && familyMart.code === 1) {
-          this.nearbyFamilyMartStores = familyMart.data.sort(
-            (a: StoreModel, b: StoreModel) => a.distance - b.distance
-          );
-        }
+        // 結合兩個 API 請求
+        forkJoin({
+          sevenEleven: this.sevenElevenService.getNearByStoreList(locationData711),
+          familyMart: this.familyMartService.getNearByStoreList(locationFamilyMart)
+        }).subscribe(
+          ({ sevenEleven, familyMart }) => {
+            // 處理 7-11 資料
+            if (sevenEleven && sevenEleven.element && sevenEleven.element.StoreStockItemList) {
+              this.nearby711Stores = sevenEleven.element.StoreStockItemList.sort(
+                (a: StoreStockItem, b: StoreStockItem) => a.Distance - b.Distance
+              );
+            }
 
-        // 等兩者完成後合併資料
-        if (storeLatitude && storeLongitude) {
-          this.combineStoreList(storeLatitude, storeLongitude);
-        }
-        else{
-          this.combineStoreList();
-        }
-      },
-      (error) => {
-        console.error('Error fetching store data:', error);
-      }
-    );
+            // 處理全家資料
+            if (familyMart && familyMart.code === 1) {
+              this.nearbyFamilyMartStores = familyMart.data.sort(
+                (a: StoreModel, b: StoreModel) => a.distance - b.distance
+              );
+            }
+
+            // 等兩者完成後合併資料
+            if (storeLatitude && storeLongitude) {
+              this.combineStoreList(storeLatitude, storeLongitude);
+            }
+            else{
+              this.combineStoreList();
+            }
+          },
+          (error) => {
+            console.error('Error fetching store data:', error);
+          }
+        );
+      });
   }
 
   getFStoreQty(store: StoreModel): number {
