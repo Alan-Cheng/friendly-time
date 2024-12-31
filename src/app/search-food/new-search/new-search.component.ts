@@ -514,8 +514,7 @@ export class NewSearchComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('搜尋店家:', this.searchSelectedStore);
-    alert('此功能將於近期開放！')
+    console.log('輸入的搜尋關鍵字:', this.searchSelectedStore);
   }
 
   onUseCurrentLocation(): void {
@@ -607,8 +606,9 @@ export class NewSearchComponent implements OnInit {
       ];
     }
     else{
-    // 根據距離排序
-    this.totalStoresShowList.sort((a, b) => a.distance - b.distance);
+      // 根據距離排序
+      this.totalStoresShowList.sort((a, b) => a.distance - b.distance);
+      console.log('最近的商店:', this.totalStoresShowList);
     }
   }
 
