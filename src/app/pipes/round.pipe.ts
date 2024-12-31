@@ -15,20 +15,16 @@ export class RoundPipe implements PipeTransform {
     }
 
     if(precision === -1){
-      const factor = Math.pow(10, precision); // 計算小數位數
-      const roundedValue = Math.round(numericValue * factor) / factor; // 四捨五入到指定精度
-      return `${roundedValue} 元`;
+      // -1代表是顯示打折後的價格
+      return `${numericValue.toFixed(0)} 元`;
     }
   
     // 判斷數值是否小於 1000
     if (numericValue < 1000) {
-      const factor = Math.pow(10, precision); // 計算小數位數
-      const roundedValue = Math.round(numericValue * factor) / factor; // 四捨五入到指定精度
-      return `${roundedValue} 公尺`; // 返回數字加 ' 公尺'
+      return `${numericValue.toFixed(precision)} 公尺`; // 返回數字加 ' 公尺'
     } else {
       const kilometers = numericValue / 1000; // 將數字轉換為公里
-      const roundedKilometers = Math.round(kilometers * 10) / 10; // 四捨五入到小數點後一位
-      return `${roundedKilometers} 公里`; // 返回數字加 ' 公里'
+      return `${kilometers.toFixed(precision)} 公里`; // 返回數字加 ' 公里'
     }
   }  
 }
